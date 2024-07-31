@@ -1,4 +1,4 @@
-<div class="flex flex-column gap-2 relative" style="height: 70vh;">
+<div class="flex flex-col gap-2 relative" style="height: 70vh;">
   @if(loading){
   <div class="absolute top-50 left-50 z-1" style="transform: translate(-50%, -50%);">
     <p-progressSpinner ariaLabel="loading" />
@@ -21,7 +21,7 @@
     </button>
   </div>
 
-  <section class="flex-1 h-1rem">
+  <section class="flex-1 h-1">
     <image-cropper [imageChangedEvent]="imageChangedEvent" [imageFile]="originalImage" [maintainAspectRatio]="true"
       format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)"
       (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()" [(transform)]="transform"

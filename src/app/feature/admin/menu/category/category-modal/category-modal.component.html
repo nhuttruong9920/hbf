@@ -1,0 +1,49 @@
+<form novalidate [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-3">
+  <div class="grid">
+    @if(!categoryId){
+    <div class="col-12 form-field">
+      <label for="id">Id
+        <sup class="required">*</sup>
+      </label>
+      <p-inputNumber inputId="id" formControlName="id" placeholder="Id" [showButtons]="true" min="0" />
+      <app-error-message [control]="categoryForm.controls['id']"></app-error-message>
+    </div>
+    }
+    <div class="col-12 form-field">
+      <label for="title">Tiêu đề <sup class="required">*</sup> </label>
+      <input type="text" name="title" id="title" pInputText formControlName="title" placeholder="Tiêu đề" class="w-full"
+        autocomplete="on" />
+      <app-error-message [control]="categoryForm.controls['title']"></app-error-message>
+    </div>
+    <div class="col-12 form-field">
+      <label for="description">Mô tả <sup class="required">*</sup> </label>
+      <input type="text" name="description" id="description" pInputText formControlName="description"
+        placeholder="Mô tả" class="w-full" autocomplete="on" />
+      <app-error-message [control]="categoryForm.controls['description']"></app-error-message>
+    </div>
+    <div class="col-12">
+      <div class="flex gap-2 items-center">
+        <img src="{{categoryForm.controls['url'].value}}" alt="img" appImgFallback class="border-round-xs" height="64">
+        <div class="form-field flex-1">
+          <label for="url">Hình ảnh </label>
+          <div class="flex gap-2">
+            <input type="text" name="url" id="url" pInputText formControlName="url" placeholder="Hình ảnh"
+              autocomplete="on" class="flex-1" />
+            <button pButton pRipple label="Chọn" (click)="onOpenImageSelectionModal($event)"> </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8 form-field">
+      <label for="tag">Nhãn</label>
+      <input type="text" name="tag" id="tag" pInputText formControlName="tag" placeholder="Nhãn" class="w-full"
+        autocomplete="on" />
+    </div>
+    <div class="col-4 form-field">
+      <label for="visible">Hiển thị </label>
+      <p-inputSwitch formControlName="visible" inputId="visible" />
+    </div>
+  </div>
+  <button type="submit" pButton pRipple [label]="categoryId?'Cập nhật':'Tạo mới'"
+    [disabled]="categoryForm.invalid"></button>
+</form>

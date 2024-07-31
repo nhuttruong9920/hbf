@@ -1,1 +1,65 @@
-<p>category works!</p>
+<main class="h-full bg-white flex flex-col gap-2 rounded">
+  <section class="flex items-center justify-between p-2">
+    <div class="flex gap-2 items-center">
+      <h2 class="font-bold text-2xl">Danh mục </h2>
+      <span class="text-sm font-bold py-1 px-2 rounded-full text-white"
+        [class]="categoryRequest.isDeleted ? 'bg-red-500':'bg-primary-500'">
+        <i class="fas mr-2" [class]="categoryRequest.isDeleted ? 'fa-trash':'fa-list'"></i>{{totalRecords}}</span>
+      <p-inputSwitch [(ngModel)]="categoryRequest.isDeleted" (onChange)="fetchCategories()" class="leading-none" />
+    </div>
+    <div class="flex gap-2 items-center">
+      <span class="p-input-icon-left">
+        <i class="fas fa-search"></i>
+        <input name="search" pInputText type="text" class="w-full" (debounceEvent)="onSearchCategory($event)"
+          placeholder="Tìm kiếm" appDebounce />
+      </span>
+      <button icon="fas fa-plus" pButton pRipple label="Tạo mới" (click)="onOpenModal()"> </button>
+    </div>
+  </section>
+  <section class="h-1 flex-1 p-2">
+    <p-table [value]="categories" [scrollable]="true" scrollHeight="flex" [paginator]="true"
+      [rowsPerPageOptions]="[10, 25, 50]" [rows]="50" [lazy]="true" (onLazyLoad)="onLoadCategories($event)"
+      [totalRecords]="totalRecords" [loading]="categoryLoading">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th class="white-space-nowrap">Tiêu đề</th>
+          <th class="white-space-nowrap">Mô tả</th>
+          <th class="white-space-nowrap">Nhãn</th>
+          <th class="white-space-nowrap">Hiển thị</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-category>
+        <tr>
+          <td>{{ category.id }}</td>
+          <td>
+            <div class="flex gap-2 items-center">
+              <img src="{{ category.url }}" alt="img" width="60" appImgFallback
+                class="rounded-sm aspect-square object-cover">
+              <b>{{ category.title }}</b>
+            </div>
+          </td>
+          <td>{{ category.description }}</td>
+          <td>{{ category.tag }}</td>
+          <td><p-checkbox [binary]="true" [(ngModel)]="category.visible" readonly="true" /></td>
+          <td width="96" class="text-center">
+            <div class="white-space-nowrap flex gap-3 justify-content-center">
+              @if(!categoryRequest.isDeleted){
+              <i class="fas fa-edit cursor-pointer hover:text-primary text-2xl" (click)="onOpenModal(category.id)"></i>
+              <i class="fas fa-trash-alt cursor-pointer hover:text-red-500 text-2xl"
+                (click)="onConfirmDelete($event, category.id)"></i>
+              } @else {
+              <i class="fas fa-trash-undo-alt cursor-pointer hover:text-green-500 text-2xl"
+                (click)="onConfirmRestore($event, category.id)"></i>
+              }
+            </div>
+          </td>
+        </tr>
+
+      </ng-template>
+    </p-table>
+  </section>
+</main>
+
+<p-confirmPopup />

@@ -4,7 +4,8 @@
 @import "../node_modules/tailwindcss/utilities.css" layer(tailwindcss);
 
 // PrimeNG
-@import "../node_modules/primeng/resources/themes/aura-light-cyan/theme.css";
+// @import "../node_modules/primeng/resources/themes/aura-light-green/theme.css";
+@import "assets/styles/primeng.scss";
 @import "primeng/resources/primeng.css";
 
 /* Font Awesome */

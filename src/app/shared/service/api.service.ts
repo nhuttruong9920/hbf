@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
+import { AuthService } from '@core/service/auth.service';
 import { Observable } from 'rxjs';
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
@@ -14,10 +15,11 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
+    private authService: AuthService,
     @Optional() @Inject(API_BASE_URL) baseUrl?: string
   ) {
     this.baseUrl = baseUrl ?? '';
-    // this.accessToken = `Bearer ${authService.accessToken}`;
+    this.accessToken = `Bearer ${this.authService.accessToken}`;
     this.httpHeaders = new HttpHeaders({
       Authorization: this.accessToken,
     });

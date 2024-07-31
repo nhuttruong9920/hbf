@@ -1,5 +1,5 @@
 <div
-  class="uploader flex justify-content-center align-items-center  cursor-pointer border-round-md transition-duration-300 border-2 border-dashed color-important"
+  class="uploader flex justify-content-center items-center  cursor-pointer rounded-md transition-duration-300 border-2 border-dashed color-important"
   [class]="dragging ? 'border-primary' : 'border-gray-600'" ondragover="return false;" [class.loaded]="loaded"
   [style.outlineColor]="dragging ? activeColor : baseColor" (dragenter)="handleDragEnter()"
   (dragleave)="handleDragLeave()" (drop)="handleDrop($event)" (click)="fileInput.click()">

@@ -1,0 +1,78 @@
+<section>
+  <form novalidate [formGroup]="dishForm" (ngSubmit)="onSubmit()" class="flex flex-column gap-3">
+    <div class="grid">
+      <div class="col-12 form-field">
+        <label for="category">Danh mục </label>
+        <div class="flex gap-2">
+          <div class="flex gap-1 align-items-center flex-1 border-1 border-300 border-round-md overflow-hidden px-1">
+            @if(categoryCompacts&&categoryCompacts.length > 0){
+            @for(category of categoryCompacts;track category.id){
+            <span class="text-xs p-1 border-round-sm bg-primary-200">{{category.title}} <i
+                class="fal fa-circle-xmark ml-2" (click)="onRemoveCategory(category.id)"></i></span>
+            }
+            }
+          </div>
+          <button pButton pRipple label="Chọn" (click)="onOpenCategorySelectionModal($event)">
+          </button>
+        </div>
+      </div>
+      <div class="col-12 form-field">
+        <label for="title">Tiêu đề <sup class="required">*</sup> </label>
+        <input type="text" name="title" id="title" pInputText formControlName="title" placeholder="Tiêu đề"
+          class="w-full" autocomplete="on" />
+        @if (!loading) {
+        <app-error-message [control]="dishForm.controls['title']"></app-error-message>
+        }
+      </div>
+      <div class="col-12 form-field">
+        <label for="description">Mô tả <sup class="required">*</sup> </label>
+        <input type="text" name="description" id="description" pInputText formControlName="description"
+          placeholder="Mô tả" class="w-full" autocomplete="on" />
+        @if (!loading) {
+        <app-error-message [control]="dishForm.controls['description']"></app-error-message>
+        }
+      </div>
+      <div class="col-12 md:col-6 form-field">
+        <label for="price">Giá <sup class="required">*</sup> </label>
+        <p-inputNumber inputId="price" formControlName="price" placeholder="Giá" [showButtons]="true" [min]="0"
+          [step]="1000" />
+        @if (!loading) {
+        <app-error-message [control]="dishForm.controls['price']"></app-error-message>
+        }
+      </div>
+      <div class="col-12 md:col-6 form-field">
+        <label for="unit">Đơn vị <sup class="required">*</sup> </label>
+        <input type="text" name="unit" id="unit" pInputText formControlName="unit" placeholder="Đơn vị" class="w-full"
+          autocomplete="on" />
+        @if (!loading) {
+        <app-error-message [control]="dishForm.controls['unit']"></app-error-message>
+        }
+      </div>
+      <div class="col-12">
+        <div class="flex gap-2 align-items-center">
+          <img src="{{dishForm.controls['url'].value}}" alt="img" appImgFallback class="border-round-xs"
+            height="64">
+          <div class="form-field flex-1">
+            <label for="url">Hình ảnh </label>
+            <div class="flex gap-2">
+              <input type="text" name="url" id="url" pInputText formControlName="url" placeholder="Hình ảnh"
+                autocomplete="on" class="flex-1" />
+              <button pButton pRipple label="Chọn" (click)="onOpenImageSelectionModal($event)"> </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-8 form-field">
+        <label for="tag">Nhãn </label>
+        <input type="text" name="tag" id="tag" pInputText formControlName="tag" placeholder="Nhãn" class="w-full"
+          autocomplete="on" />
+      </div>
+      <div class="col-4 form-field">
+        <label for="visible">Hiển thị </label>
+        <p-inputSwitch formControlName="visible" inputId="visible" />
+      </div>
+    </div>
+    <button type="submit" pButton pRipple [label]="dishId?'Cập nhật':'Tạo mới'"
+      [disabled]="dishForm.invalid"></button>
+  </form>
+</section>

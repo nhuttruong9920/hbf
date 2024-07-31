@@ -1,0 +1,22 @@
+<div class="flex flex-column h-full">
+  <section class="flex-1 overflow-scroll p-2">
+    <div class="grid">
+      @for(category of categories;track category.id){
+      <div class="col-4 " (click)="onSelectCategory(category)">
+        <span class="flex gap-2 border-1 border-round border-gray-300 p-2 cursor-pointer align-items-center"
+          [class.selected]="onCheckSelecated(category)">
+          <img src="{{ category.url }}" alt="cate" height="30" appImgFallback>
+          <span>{{ category.title }}</span>
+        </span>
+      </div>
+      }
+    </div>
+  </section>
+  <section>
+    <p-paginator (onPageChange)="onPageChange($event)" [rows]="50" [totalRecords]="totalRecords" />
+  </section>
+  <section class="flex justify-content-center py-2">
+    <button pButton pRipple label="Chọn" (click)="onConfirmSelection()">
+    </button>
+  </section>
+</div>

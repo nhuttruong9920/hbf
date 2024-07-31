@@ -1,1 +1,79 @@
-<p>dish works!</p>
+<main class="h-full bg-white flex flex-column gap-2 border-round">
+  <section class="flex align-items-center justify-content-between p-2">
+    <div class="flex gap-2 align-items-center">
+      <h2>Món ăn</h2>
+      <span class="text-sm font-bold py-1 px-2 border-round-3xl text-white"
+        [class]="dishRequest.isDeleted ? 'bg-red-500':'bg-primary-500'">
+        <i class="fas mr-2" [class]="dishRequest.isDeleted ? 'fa-trash':'fa-list'"></i>{{totalRecords}}</span>
+      <p-inputSwitch [(ngModel)]="dishRequest.isDeleted" (onChange)="fetchDishes()" class="line-height-0" />
+    </div>
+    <div class="flex gap-2 align-items-center">
+      <span class="p-input-icon-left">
+        <i class="fas fa-search"></i>
+        <input name="search" pInputText type="text" class="w-full" (debounceEvent)="onSearchDish($event)"
+          placeholder="Tìm kiếm" appDebounce />
+      </span>
+      <button icon="fas fa-plus" pButton pRipple label="Tạo mới" (click)="onOpenModal()"> </button>
+    </div>
+  </section>
+  <section class="h-1rem flex-1 p-2">
+    <p-table [value]="dishes" [scrollable]="true" scrollHeight="flex" [paginator]="true"
+      [rowsPerPageOptions]="[10, 25, 50]" [rows]="50" [lazy]="true" (onLazyLoad)="onLoadDishes($event)"
+      [totalRecords]="totalRecords" [loading]="dishLoading">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th class="white-space-nowrap">Danh mục</th>
+          <th>Món</th>
+          <th class="white-space-nowrap">Mô tả</th>
+          <th class="white-space-nowrap">Nhãn</th>
+          <th class="white-space-nowrap">Hiển thị</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-dish>
+        <tr>
+          <td>{{ dish.id }}</td>
+          <td class="white-space-nowrap ">
+            <div class="flex gap-1 flex-wrap">
+              @for(category of dish.categories;track category.id){
+              <span class="text-xs p-1 border-round-sm bg-primary-200">{{category.title}}</span>
+              }
+            </div>
+          </td>
+          <td>
+            <div class="flex gap-2">
+              <div><img src="{{ dish.url }}" alt="img" width="60" appImgFallback class="border-round-xs"
+                  style="aspect-ratio: 1/1;object-fit: cover;"></div>
+              <div class="flex flex-column gap-2">
+                <b>{{dish.title}}</b>
+                <span>{{dish.price.currentPrice|toLocaleString}}<sup>đ</sup>/{{dish.price.originalPrice
+                  |toLocaleString}}<sup>đ</sup>
+                  ({{dish.unit}})</span>
+              </div>
+            </div>
+          </td>
+          <td>{{ dish.description }}</td>
+          <td>{{ dish.tag }}</td>
+          <td><p-checkbox [(ngModel)]="dish.visible" readonly="true" binary="true" /></td>
+          @if(!dishRequest.isDeleted){
+          <td>
+            <div class="white-space-nowrap flex gap-3 justify-content-center">
+              <i class="fas fa-edit cursor-pointer hover:text-primary text-2xl" (click)="onOpenModal(dish.id)"></i>
+              <i class="fas fa-trash-alt cursor-pointer hover:text-red-500 text-2xl"
+                (click)="onConfirmDelete($event, dish.id)"></i>
+            </div>
+          </td>
+          } @else {
+          <td class="text-center">
+            <i class="fas fa-trash-undo-alt cursor-pointer hover:text-green-500 text-2xl"
+              (click)="onConfirmRestore($event, dish.id)"></i>
+          </td>
+          }
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
+</main>
+
+<p-confirmPopup />

@@ -1,0 +1,34 @@
+:root {
+  --primary-color: #f5a65f;
+  --secondary-color: #90bb8f;
+  --primary-50: color-mix(in srgb, var(--primary-color) 5%, white);
+  --primary-100: color-mix(in srgb, var(--primary-color) 10%, white);
+  --primary-200: color-mix(in srgb, var(--primary-color) 20%, white);
+  --primary-300: color-mix(in srgb, var(--primary-color) 30%, white);
+  --primary-400: color-mix(in srgb, var(--primary-color) 40%, white);
+  --primary-500: var(--primary-color);
+  --primary-600: color-mix(in srgb, var(--primary-color), black 10%);
+  --primary-700: color-mix(in srgb, var(--primary-color), black 20%);
+  --primary-800: color-mix(in srgb, var(--primary-color), black 30%);
+  --primary-900: color-mix(in srgb, var(--primary-color), black 40%);
+  --secondary-50: color-mix(in srgb, var(--secondary-color) 5%, white);
+  --secondary-100: color-mix(in srgb, var(--secondary-color) 10%, white);
+  --secondary-200: color-mix(in srgb, var(--secondary-color) 20%, white);
+  --secondary-300: color-mix(in srgb, var(--secondary-color) 30%, white);
+  --secondary-400: color-mix(in srgb, var(--secondary-color) 40%, white);
+  --secondary-500: var(--secondary-color);
+  --secondary-600: color-mix(in srgb, var(--secondary-color), black 10%);
+  --secondary-700: color-mix(in srgb, var(--secondary-color), black 20%);
+  --secondary-800: color-mix(in srgb, var(--secondary-color), black 30%);
+  --secondary-900: color-mix(in srgb, var(--secondary-color), black 40%);
+}
+
+.light {
+  --text: #222;
+  --background: #fff;
+}
+
+.dark {
+  --text: #ddd;
+  --background: #222;
+}

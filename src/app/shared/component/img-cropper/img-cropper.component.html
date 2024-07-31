@@ -1,0 +1,48 @@
+<div class="flex flex-column gap-2 relative" style="height: 70vh;">
+  @if(loading){
+  <div class="absolute top-50 left-50 z-1" style="transform: translate(-50%, -50%);">
+    <p-progressSpinner ariaLabel="loading" />
+  </div>
+  }
+  <app-image-uploader (imageChanged)="onFileChange($event)"></app-image-uploader>
+
+  <div class="flex gap-1">
+    <button class="p-button-xs" pButton pRipple label="Xoay trái" (click)="rotateLeft()" size="small"
+      icon="fas fa-rotate-left" severity="secondary">
+    </button>
+    <button class="p-button-xs" pButton pRipple label="Xoay phải" (click)="rotateRight()" size="small"
+      icon="fas fa-rotate-right" severity="secondary">
+    </button>
+    <button class="p-button-xs" pButton pRipple label="Lật ngang" (click)="flipHorizontal()" size="small"
+      icon="fas fa-horizontal-rule" severity="secondary">
+    </button>
+    <button class="p-button-xs" pButton pRipple label="Lật dọc" (click)="flipVertical()" size="small"
+      icon="fa-solid fa-pipe" severity="secondary">
+    </button>
+  </div>
+
+  <section class="flex-1 h-1rem">
+    <image-cropper [imageChangedEvent]="imageChangedEvent" [imageFile]="originalImage" [maintainAspectRatio]="true"
+      format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)"
+      (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()" [(transform)]="transform"
+      [canvasRotation]="canvasRotation"></image-cropper>
+  </section>
+
+
+  <section class="flex justify-content-center">
+    <button pButton pRipple label="Xong" (click)="onConfirmSelection()" [disabled]="loading || !resultFile">
+    </button>
+  </section>
+
+
+  <div class="text-center"><span id="method-divider">Hoặc chọn nhanh trong bộ sưu tập</span></div>
+
+  <div class="overflow-scroll">
+    <div id="img-collection" class="flex gap-2 py-2">
+      @for(image of imageCollection;track image){
+      <img src="{{image}}" alt="img" width="50" height="50" (click)="onSelectImageFromCollection(image)">
+      }
+    </div>
+  </div>
+
+</div>

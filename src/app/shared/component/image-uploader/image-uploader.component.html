@@ -1,0 +1,12 @@
+<div
+  class="uploader flex justify-content-center align-items-center  cursor-pointer border-round-md transition-duration-300 border-2 border-dashed color-important"
+  [class]="dragging ? 'border-primary' : 'border-gray-600'" ondragover="return false;" [class.loaded]="loaded"
+  [style.outlineColor]="dragging ? activeColor : baseColor" (dragenter)="handleDragEnter()"
+  (dragleave)="handleDragLeave()" (drop)="handleDrop($event)" (click)="fileInput.click()">
+  <div class="pointer-events-none transition-duration-300" [class]="dragging ? 'text-primary' : 'text-gray-600'">
+    <i class="fas fa-image pointer-events-none  hover:text-primary"></i>
+    <span> Nhấn để chọn hoặc kéo thả hình vào đây!
+    </span>
+  </div>
+  <input class="hidden" #fileInput type="file" name="file" accept="image/*" (change)="handleInputChange($event)">
+</div>

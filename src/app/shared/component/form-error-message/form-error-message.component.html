@@ -1,0 +1,12 @@
+@if (hasError()) {
+<div class="flex flex-column">
+  @for (config of errorConfig; track config.validator) {
+  @if (control.errors && control.errors[config.validator]) {
+  <small class="form-error">{{ config.message }}
+    @if(config.desiredValue){
+    {{ control.errors[config.validator][config.desiredValue] }}
+    }</small>
+  }
+  }
+</div>
+}

@@ -1,0 +1,15 @@
+.uploader {
+  background-color: #eee;
+  height: 30px;
+  width: 100%;
+}
+
+.color-important {
+  &:hover {
+    border-color: var(--primary-color) !important;
+
+    div {
+      color: var(--primary-color) !important;
+    }
+  }
+}

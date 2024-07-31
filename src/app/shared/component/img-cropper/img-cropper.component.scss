@@ -1,0 +1,36 @@
+#method-divider {
+  position: relative;
+  text-align: center;
+
+  &::before {
+    content: "";
+    height: 1px;
+    background-color: #bbb;
+    width: 50px;
+    position: absolute;
+    top: 50%;
+    left: -60px;
+  }
+  &::after {
+    content: "";
+    height: 1px;
+    background-color: #bbb;
+    width: 50px;
+    position: absolute;
+    top: 50%;
+    right: -60px;
+  }
+}
+
+#img-collection {
+  cursor: pointer;
+
+  img {
+    transition: 0.3s;
+  }
+
+  &:hover img:not(:hover) {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+}

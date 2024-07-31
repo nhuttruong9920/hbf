@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+// Tailwind
+@import "../node_modules/tailwindcss/base.css" layer(tailwindcss);
+@import "../node_modules/tailwindcss/components.css" layer(tailwindcss);
+@import "../node_modules/tailwindcss/utilities.css" layer(tailwindcss);
+
+// PrimeNG
+@import "../node_modules/primeng/resources/themes/aura-light-cyan/theme.css";
+@import "primeng/resources/primeng.css";
+
+/* Font Awesome */
+@import "assets/fonts/fa-pro-6.2.1/css/all.min.css";
+
+// Custom
+@import "assets/styles/color.scss";
+@import "assets/styles/custom.scss";

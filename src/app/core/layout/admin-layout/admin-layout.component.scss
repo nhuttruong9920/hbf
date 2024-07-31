@@ -1,0 +1,25 @@
+#admin-container {
+  display: grid;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar content";
+  grid-template-columns: 13.75rem 1fr;
+  grid-template-rows: 2.75rem 1fr;
+  height: 100vh;
+  transition: grid-template-columns 0.3s;
+}
+
+#sidebar {
+  grid-area: sidebar;
+  overflow: auto;
+}
+
+#topbar {
+  grid-area: topbar;
+  overflow: hidden;
+}
+
+#content {
+  grid-area: content;
+  overflow: hidden;
+}
